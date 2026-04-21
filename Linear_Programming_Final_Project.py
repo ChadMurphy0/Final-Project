@@ -77,4 +77,28 @@ def createTableau(c_std, A_std, b_std):
 
     return tableau
 
+def findpivcol(tableau):
+    """
+    This function will identify the pivot column with the most negative coefficient so as to increase profits the most
+
+    Input:
+    Tableau (numpy array): The current Simplex matrix (found above)
+
+    Output:
+    col_index (integer): The index of the chosen pivot column, or -1 if it is already optimal
+    
+    """
+
+    # This will look at the objective row (the very last row), excluding the RHS values
+    obj_row = tableau[-1, :-1]
+    # np.argmin returns the index of the smallest element in the array
+    col_index = np.argmin(obj_row)
+
+    # If we already have the optimal solution, the most negative value is basically 0
+    if obj_row[col_index] >= -TOL:
+        return -1
+    
+    # This will return the integer value of the index
+    return int(col_index)
+
 
