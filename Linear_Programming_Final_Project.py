@@ -101,4 +101,41 @@ def findpivcol(tableau):
     # This will return the integer value of the index
     return int(col_index)
 
+def findpivrow(tableau, col_index):
+    """
+    This function will perform the minimum ratio test. This means that it will divide the right side constants by the positive coefficients in the pivot column
+    This tells us which constraint becomes the "bottleneck" first
+
+    Inputs:
+    tableau (numpy array): The current Simplex matrix
+    col_index (integer): The pivot column we found in the previous function
+
+    Output:
+    row_index (integer): The index of the pivot row
+    
+    """
+
+    # This will define our RHS values and our column values (from the pivot column)
+    rhs = tableau[:-1, -1]
+    col_vals = tableau[:-1, col_index]
+
+    # This makes sure that values are only divided if they are positive
+    valid = col_vals > TOL
+
+    # If there are no positive values, then it will return a value error
+    # np.any tests if there is any value in the array meets a certain condition
+    if not np.any(valid):
+        raise ValueError("The problem does not have bounds")
+
+    # We will initialize all ratios with infinity in the list, so when we pick the minimum, they won't effect it
+    ratios = np.full(len(rhs), np.inf)
+
+    # Compute the ratio (RHS / column value) for valid rows
+    ratios[valid] = rhs[valid] / col_vals[valid]
+
+    # Find the one with the smallest positive ratio, or the "bottleneck"
+    row_index = np.argmin(ratios)
+
+    # Makes the row_index value an integer
+    return int(row_index)
 
