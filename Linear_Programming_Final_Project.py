@@ -33,7 +33,6 @@ def standardform(c, A, b, constrain_types = None):
     # np.eye is the funciton for the identity matrix
     A_std = np.hstack((A, np.eye(num_constraints)))
 
-
     # This pads the objective vector with zeros because the slack variables do not affect profit
     # np.concatenate joins arrays
     # np.zeros creates a vector of only zeros with size num_constraints
@@ -43,3 +42,39 @@ def standardform(c, A, b, constrain_types = None):
 
 
     
+def createTableau(c_std, A_std, b_std):
+    """
+    This function will create the tableau matrix that will be used for the Simplex algorithm.
+
+    Inputs:
+    c_std (numpy array): Standardized objective function coefficients
+    A_std (numpy array): Standardized constraint matrix (with slack variables added)
+    b_std (numpy array): Standardized right side values
+
+    Outputs:
+    tableau (numpy array): A 2D matrix that represents the initial Simplex state
+    
+    """
+
+    # This defines the variables num_constraints and num_vars based on the number of rows and columns in A_std
+    num_constraints, num_vars = A_std.shape
+
+    # We want to pre-allocate the size of the tableau.
+    # Rows will equal the number of constraints + 1 for the objective funciton
+    # Columns will equal the number of variables (including the slack variables) + 1 for the RHS values
+    tableau = np.zeros((num_constraints + 1, num_vars + 1))
+
+    # Now we want to replace parts of the tableau
+    # We will start by inserting standard forms into the upper portion of the tableau
+
+    # This appends A_std to the top rows of the matrix from 0 to constraints and left most columns from 0 to vars
+    tableau[:num_constraints, :num_vars] = A_std 
+    # This selects the top rows from 0 to constraints and the column furthest on the right and inserts b_std
+    tableau[:num_constraints, -1] = b_std
+
+    # The objective funciton will go in the bottom row of the tableau (this will be negative to find the most negative)
+    tableau[-1, num_vars] = -c_std # Very bottom row
+
+    return tableau
+
+
