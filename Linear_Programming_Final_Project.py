@@ -3,7 +3,7 @@ import numpy as np
 # We are going to implement a tolerance, so that we can avoid rounding errors (this is similar to what we've done in class)
 TOL = 1e-10
 
-def standardform(c, A, b, constrain_types = None):
+def standardform(c, A, b, constraint_types = None):
     """"
     This funciton will convert the linear program into standard form, by using slack variables
     
@@ -160,9 +160,70 @@ def pivot(tableau, row_index, col_index):
     factors = tableau[:, col_index].copy() # This creates a copy of the object
     factors[row_index] = 0 # Set the pivot row's factor to 0 so we don't subtract it from itself
 
-    # The np.newaxis will turn the 1D 'factors' array into a 2D column to broadcast accross the matrix
+    # The np.newaxis will transform flat 1D lists into 2D column vectors. Then, we multiply this vector by the horizontal pivot row. This does matrix math for us. 
     tableau = tableau - factors[:, np.newaxis] * tableau[row_index, :]
 
     return tableau
 
+def Simplex(c, A, b, constraint_types = None):
+    """
+    This function will perform the Simplex algorithm, combing all of the functions we have defined above
+    
+    Inputs:
+    c (list or numpy array): The objective function coefficients.
+    A (list of list or numpy array): The constraint matrix.
+    b (list or numpy array): The RHS constraint values
+    constrain_types (list of strings): The inequalities for each of the constraints (<=, >=, =). If none, assumes <= for all.
+    
+    Ouputs:
+    x (numpy array): The optimal solution vector for the original variables
+    max_profit (float): The maximum profit given the optimal solution
+
+    """
+
+    # Standardize our equations
+    c_std, A_std, b_std = standardform(c, A, b, constraint_types)
+
+    # Create the initial tableau
+    tableau = createTableau(c_std, A_std, b_std)
+
+    # We will want to continually pivot until we have our optimal solution
+    # Therefore, we want a loop. This loop will continually run until col_index = 1.
+    while True:
+        col_index = findpivcol(tableau)
+        if col_index == -1: # This is what we have designated as finding the optimal solution
+            break
+
+        # Here, we are simply calling our functions of finding the pivot row and performing the row operations.
+        row_index = findpivrow(tableau, col_index)
+        tableau = pivot(tableau, row_index, col_index)
+
+    # Extract out the optimal solution vector x
+    num_original_vars = len(c)
+
+    # This will make all of the elements 0 based on the length
+    x = np.zeros(num_original_vars)
+
+    # We will now check each column belonging to the original variables
+    for j in range(num_original_vars):
+        col = tableau[:-1, j]
+        
+        # A basic variable will have the entry of 1 (since row operations will make this the case)
+        # We will use the TOL that we defined early on to account for some of the float inaccuracies
+
+        # This one line of code will add up all of the numbers in the column (which should be many 0s and one 1) and then subtracts by the largest number (which should be 1)
+        # This will produce 0, which should be less than TOL
+        # This also checks to make sure the largest number is 1. 
+        if np.sum(np.abs(col)) - np.max(np.abs(col)) < TOL and np.abs(np.max(col) - 1.0) < TOL:
+
+            # This will locate the index that the 1 is located in
+            row_index = np.argmax(np.abs(col))
+
+            # We then look at the RHS value of this column, and put that number in x
+            x[j] = tableau[row_index, -1]
+
+    # The max profit is in the bottom right corner of the tableau, as this is essentially a running total (every pivot this will update with the profit)
+    max_profit = tableau[-1, -1]
+
+    return x, max_profit
 
