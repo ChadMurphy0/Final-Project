@@ -139,3 +139,30 @@ def findpivrow(tableau, col_index):
     # Makes the row_index value an integer
     return int(row_index)
 
+def pivot(tableau, row_index, col_index):
+    """
+    This will perform the row operations to zero out the pivot column
+
+    Inputs:
+    tableau (numpy array): The current Simplex matrix
+    row_index (integer): The pivot row we found
+    col_index (integer): The pivot colum we found
+
+    Output:
+    tableau (numpy array): The updated Simplex matrix after row operations
+
+    """
+
+    # We first want to normalize the pivot row, so that the pivot number becomes 1
+    tableau[row_index, :] = tableau[row_index, :] / tableau[row_index, col_index] # We are dividing all of the elements in the row
+
+    # Next we want to subtract the multiples of the pivot row from all of the other rows
+    factors = tableau[:, col_index].copy() # This creates a copy of the object
+    factors[row_index] = 0 # Set the pivot row's factor to 0 so we don't subtract it from itself
+
+    # The np.newaxis will turn the 1D 'factors' array into a 2D column to broadcast accross the matrix
+    tableau = tableau - factors[:, np.newaxis] * tableau[row_index, :]
+
+    return tableau
+
+
