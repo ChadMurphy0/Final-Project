@@ -73,7 +73,7 @@ def createTableau(c_std, A_std, b_std):
     tableau[:num_constraints, -1] = b_std
 
     # The objective funciton will go in the bottom row of the tableau (this will be negative to find the most negative)
-    tableau[-1, num_vars] = -c_std # Very bottom row
+    tableau[-1, :num_vars] = -c_std # Very bottom row
 
     return tableau
 
@@ -182,7 +182,7 @@ def Simplex(c, A, b, constraint_types = None):
     """
 
     # Standardize our equations
-    c_std, A_std, b_std = standardform(c, A, b, constraint_types)
+    b_std, A_std, c_std = standardform(c, A, b, constraint_types)
 
     # Create the initial tableau
     tableau = createTableau(c_std, A_std, b_std)
