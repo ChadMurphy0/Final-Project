@@ -80,3 +80,22 @@ This file does two things.
 ## (8) Appendix and sources
 
 ![alt text](image-1.png)
+
+This is an example of what is happening visuallly. The code will find the optimal border point to maximize profit.
+
+
+![alt text](image-2.png)
+
+This is an example of the tableau that is created within the code. This holds all of the information, and we are able to row reduce the middle part as part of finding the maximum allocation.
+
+Sources:
+
+Crifo, S. (2020). Lecture 12: Linear programming [Lecture slides].
+
+Joshua Emmanuel. (2022, August 17). Intro to Simplex Method | Solve LP | Simplex Tableau [Video]. YouTube. https://www.youtube.com/watch?v=9YKLXFqCy6E
+
+The SciPy community. (n.d.). scipy.optimize.linprog. SciPy v1.17.0 Manual. Retrieved April 30, 2026, from https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html
+
+Gemini shareable link:
+https://gemini.google.com/share/1d0177819bae
+
