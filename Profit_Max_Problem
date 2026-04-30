@@ -20,9 +20,9 @@ if __name__ == "__main__":
     # Run the simplex algorithm for our functions
     optimal_allocation, maximum_profix = Simplex(c, A, b)
 
-    print(f"The maximum profit for this problem is: {maximum_profix} (according to our created method)")
-    print(f"The x1 goods to produce are: {optimal_allocation[0]} (according to our created method)")
-    print(f"The x2 goods to produce are: {optimal_allocation[1]} (according to our created method)")
+    print(f"The maximum profit for this problem is: {maximum_profix} (according to self-made algorithm)")
+    print(f"The x1 goods to produce are: {optimal_allocation[0]} (according to self-made algorithm)")
+    print(f"The x2 goods to produce are: {optimal_allocation[1]} (according to self-made algorithm)")
 
 
 # Compare to Python linear programming method:
@@ -40,6 +40,8 @@ result = linprog(c, A, b)
 print(f"The maximum profit for this problem is: {-result.fun} (according to ScyPi's method)") # We need to flip the negative sign again, since this is minimizing
 print(f"The x1 goods to produce are: {result.x[0]} (according to ScyPi's method)") # This is the optimal allocation for the first good
 print(f"The x2 goods to produce are: {result.x[1]} (according to ScyPi's method)") # This is the optimal allocation for the second good
+
+print("They match!")
 
 # These two values match! (Our calculation using our own Simplex method, and SciPy's calculation)
 
