@@ -37,7 +37,7 @@ The methods used in this project are: NumPy library, SciPi library, tolerance co
 
 ## (5) Usage
 
-The user can use this project in many ways. 
+The user can use this project in many ways. Run the Linear_Programming_Main_Code before anything else.
 
 First, the user can find the an answer to a linear programming questions in n dimensions. In the Profit_Max_Proglem.py file, the user can change the entries for c, A, and b. c is the profit function (profit = 6x1 + x2). A is the constraint matrix (x1 <= 200, x2 <= 300, x1 + x2 <= 400). b are the right hand side values or the maximum available resources. All of these inputs can be changed for the user to solve any problem.
 
@@ -60,7 +60,7 @@ I also tested a three dimensional case to make sure that this code ran with thre
 
 Testing_Runtimes.py:
 
-The current test I have relates to the amount of dimensions in the list (dimensions = [50, 100, 200, 400, 600, 800, 1000, 2000]). 
+The current test I have relates to the amount of dimensions in the list (dimensions = [50, 100, 200, 400, 600, 800, 1000]). 
 
 This portion is more exploratory--the user can explore how the trends differ as the dimmensions change. I know this is correct, because the runtime increases as runtime increases (which makes logical sense). I also know that this makes sense, because the general trend compared to the SciPi linear programming function has a similar macro trend, but differs slightly. 
 
