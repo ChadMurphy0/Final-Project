@@ -1,7 +1,7 @@
 # Final-Project
 Linear Programming Final Project
 
-(1) Description
+## (1) Description
 
 In this project, I was faced with the problem of linear programming. Given an objective function (a function that I would like to maximiaze) and a certain amount of constraints, can I create a program that would output the most optimal answer? For example, I want the largest amount of profit, given the restraints of producing a certain amount of goods. 
 

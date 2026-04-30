@@ -227,3 +227,22 @@ def Simplex(c, A, b, constraint_types = None):
 
     return x, max_profit
 
+# Run the profit maximization problem
+
+if __name__ == "__main__":
+    # Maximize the user's input
+    c = [1, 6] # In this case, it will maximize x_1 and 6x_2
+    # This entry are the constraints
+    A = [[1, 0], # x1 <= 200
+        [0, 1], # x2 <= 300
+        [1, 1]] # x1 + x2 <= 400
+    b = [200, 300, 400]
+
+    # Run the simplex algorithm for our functions
+    optimal_allocation, maximum_profix = Simplex(c, A, b)
+
+    print(f"The maximum profit for this problem is: {maximum_profix}")
+    print(f"The x1 goods to produce are: {optimal_allocation[0]}")
+    print(f"The x2 goods to produce are: {optimal_allocation[1]}")
+
+
