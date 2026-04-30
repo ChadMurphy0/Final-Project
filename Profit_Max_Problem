@@ -6,6 +6,7 @@ from Linear_Programming_Main_Code import *
 # A producer can produce chairs and tables. They are looking to make the maximum amount of profit for their business.
 # However, they are only able to produce a maximum of 200 chairs, 300 tables, and 400 chairs and tables.
 # The profit funciton for the allocation is pi(x1, x2) = x_1 + 6x_2. What is the maximum profit and best allocation of chairs and tables?
+# (This is the question, or at least the constraints, in the slides resource)
 
 if __name__ == "__main__":
     # Maximize the user's input

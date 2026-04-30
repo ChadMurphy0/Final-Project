@@ -77,5 +77,6 @@ This file does two things.
 (2) This function graphs the runtime of the SciPi linear programming function in the same dimmensions. This means we can compare how the runtimes differ between our created function and the SciPi function.
 
 
-## (8) Appendix and photos
+## (8) Appendix and sources
 
+![alt text](image-1.png)
