@@ -7,6 +7,7 @@ import numpy as np
 import time
 import matplotlib.pyplot as plt
 from Linear_Programming_Main_Code import *
+from scipy.optimize import linprog
 
 def generate_random_constraints(num_vars, num_constraints):
     """
@@ -30,7 +31,7 @@ def generate_random_constraints(num_vars, num_constraints):
 
     return c, A, b
 
-def time_simplex(dimensions_list):
+def time_created_simplex(dimensions_list):
     """
     This function will calculate the runtime of the Simplex algorithm with varying dimensions
 
@@ -59,10 +60,48 @@ def time_simplex(dimensions_list):
     return simplex_times
 
 dimensions = [50, 100, 200, 400, 600, 800, 1000]
-simplex_runtimes = time_simplex(dimensions) # These are the dimensions I will be testing in terms of runtime
+simplex_runtimes = time_created_simplex(dimensions) # These are the dimensions I will be testing in terms of runtime
 plt.plot(dimensions, simplex_runtimes)
 plt.xlabel("Number of dimensions (variables and constraints)")
 plt.ylabel("Runtime in seconds")
-plt.title("Runtime for Simplex algorithm dimensions comparison")
+plt.title("Runtime for self-created Simplex algorithm dimensions comparison")
+plt.grid(True)
+plt.show()
+
+
+def time_scipi_simplex(dimensions_list):
+    """
+    This function will calculate the runtime of the Simplex algorithm with varying dimensions
+
+    Inputs: 
+    dimensions_list (list of floats): A list of numbers that will indicate which dimensions to test
+
+    Outputs:
+    simplex_times (list of floats): A list of runtimes for each of the dimensions tested
+    
+    """
+
+    # Empty list that will store the values
+    simplex_times_scipi = []
+
+    for dim in dimensions_list:
+        # This will call the function that we defined above, iterating through each inputted dimension to generate an objective function with constraints in dim dimensions
+        c, A, b = generate_random_constraints(dim, dim)
+
+        # This is how we tracked the time in the pi project
+        start_time_scipi = time.perf_counter() # This defines the start time
+        linprog(c, A, b)
+        elapsed_time_scipi = time.perf_counter() - start_time_scipi # This will output the total time taken
+
+        simplex_times_scipi.append(elapsed_time_scipi) # Adds each of the runtimes to the list
+
+    return simplex_times_scipi
+
+dimensions = [50, 100, 200, 400, 600, 800, 1000]
+simplex_times_scipi = time_created_simplex(dimensions) # These are the dimensions I will be testing in terms of runtime
+plt.plot(dimensions, simplex_times_scipi)
+plt.xlabel("Number of dimensions (variables and constraints)")
+plt.ylabel("Runtime in seconds")
+plt.title("Runtime for SciPi Simplex algorithm dimensions comparison")
 plt.grid(True)
 plt.show()
