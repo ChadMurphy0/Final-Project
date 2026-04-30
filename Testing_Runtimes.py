@@ -6,7 +6,7 @@ import random
 import numpy as np
 import time
 import matplotlib.pyplot as plt
-from Linear_Programming_Final_Project import *
+from Linear_Programming_Main_Code import *
 
 def generate_random_constraints(num_vars, num_constraints):
     """

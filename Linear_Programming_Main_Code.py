@@ -227,27 +227,5 @@ def Simplex(c, A, b, constraint_types = None):
 
     return x, max_profit
 
-# Run the profit maximization problem
-
-# Economics Problem Example (This isn't actually a problem I've had on a test, but certainly something similar): 
-# A producer can produce chairs and tables. They are looking to make the maximum amount of profit for their business.
-# However, they are only able to produce a maximum of 200 chairs, 300 tables, and 400 chairs and tables.
-# The profit funciton for the allocation is pi(x1, x2) = x_1 + 6x_2. What is the maximum profit and best allocation of chairs and tables?
-
-if __name__ == "__main__":
-    # Maximize the user's input
-    c = [1, 6] # In this case, it will maximize x_1 and 6x_2
-    # This entry are the constraints
-    A = [[1, 0], # x1 <= 200, less than 200 chairs
-        [0, 1], # x2 <= 300, less than 300 tables
-        [1, 1]] # x1 + x2 <= 400, less than 400 of both
-    b = [200, 300, 400]
-
-    # Run the simplex algorithm for our functions
-    optimal_allocation, maximum_profix = Simplex(c, A, b)
-
-    print(f"The maximum profit for this problem is: {maximum_profix}")
-    print(f"The x1 goods to produce are: {optimal_allocation[0]}")
-    print(f"The x2 goods to produce are: {optimal_allocation[1]}")
 
 
