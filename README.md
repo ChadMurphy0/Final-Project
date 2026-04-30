@@ -21,3 +21,19 @@ Visually, we can graph all of the constraints on the cartesian plane (for a 2D p
 This visualization from above is all in a 2d example, with only two goods being produced. However, there are infinitely many goods that a company could produce. This function should be able to give an answer given infinite inputs. 
 
 
+
+
+## ()
+
+File breakdown (for clarity):
+
+Linear_Programming_Main_Code.py: This is the meat of the code for the project. This file defines my whole created algorithm. It iterates through 6 different functions that eventually culminate in the final function (Simplex). There is nothing to be printed in this file, but rather for it to be run first so all other files can draw on the code.
+
+Profit_Max_Problem.py:
+This file implements the application of the code. For a given profit function, good 1 constraint, good 2 constraint, combined constarint, and RHS values, it will output the maximum profit as well as the allocation of each good. The user can change the inputs (c, A, b). C is the profit function, A is the constraint matrix, and b has the RHS values. Currently, they are based on the word problem as described in the comment at the beginning. This is then compared to the SciPi linear programming function. Since they are the same, our algorithm is correct!
+
+Testing_Runtimes.py:
+This file does two things.
+(1) It compares the runtime as we increase the dimmensions of our created Simplex function. The user can change the dimmensions list to input the dimmensions they would like to test. It then graphs these runtimes as a function of dimmensions vs. runtime. 
+
+(2) This function graphs the runtime of the SciPi linear programming function in the same dimmensions. This means we can compare how the runtimes differ between our created function and the SciPi function.

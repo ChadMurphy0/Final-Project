@@ -68,6 +68,8 @@ plt.title("Runtime for self-created Simplex algorithm dimensions comparison")
 plt.grid(True)
 plt.show()
 
+# THIS FUNCTION IS THE SAME AS ABOVE, BUT INSTEAD OF PULLING MY OWN SIMPLEX ALGORITHM, IT PULLS THE SCIPI SIMPLEX ALGORITHM
+# Therefore, the times will vary (and that's the point)
 
 def time_scipi_simplex(dimensions_list):
     """
@@ -97,7 +99,6 @@ def time_scipi_simplex(dimensions_list):
 
     return simplex_times_scipi
 
-dimensions = [50, 100, 200, 400, 600, 800, 1000]
 simplex_times_scipi = time_created_simplex(dimensions) # These are the dimensions I will be testing in terms of runtime
 plt.plot(dimensions, simplex_times_scipi)
 plt.xlabel("Number of dimensions (variables and constraints)")
