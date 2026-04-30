@@ -13,8 +13,8 @@ if __name__ == "__main__":
     # This entry are the constraints
     A = [[1, 0], # x1 <= 200, less than 200 chairs
         [0, 1], # x2 <= 300, less than 300 tables
-        [1, 1]] # x1 + x2 <= 400, less than 400 of both
-    b = [200, 300, 400]
+        [1, 1],] # x1 + x2 <= 400, less than 400 of both
+    b = [200, 300, 400] # Maximum available resources
 
     # Run the simplex algorithm for our functions
     optimal_allocation, maximum_profix = Simplex(c, A, b)
@@ -40,5 +40,29 @@ print(f"The maximum profit for this problem is: {-result.fun} (according to ScyP
 print(f"The x1 goods to produce are: {result.x[0]} (according to ScyPi's method)") # This is the optimal allocation for the first good
 print(f"The x2 goods to produce are: {result.x[1]} (according to ScyPi's method)") # This is the optimal allocation for the second good
 
-
 # These two values match! (Our calculation using our own Simplex method, and SciPy's calculation)
+
+
+
+# As part of testing, I am running a three variable one below to make sure I get an output
+
+# if __name__ == "__main__":
+#     # Maximize the user's input
+#     c = [100, 150, 250]
+#     # This entry are the constraints
+#     A = [
+#     [2, 3, 5],
+#     [1, 2, 2], 
+#     [1, 1, 2]]
+#     b = [1000, 500, 400]
+
+#     # Run the simplex algorithm for our functions
+#     optimal_allocation, maximum_profit = Simplex(c, A, b)
+
+#     print(f"Maximum Profit: ${maximum_profit}")
+#     print(f"x1: {optimal_allocation[0]}")
+#     print(f"x2: {optimal_allocation[1]}")
+#     print(f"x3: {optimal_allocation[2]}")
+
+
+# This works, and will leave it here to show testing, but have commented it out.

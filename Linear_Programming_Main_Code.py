@@ -227,5 +227,3 @@ def Simplex(c, A, b, constraint_types = None):
 
     return x, max_profit
 
-
-

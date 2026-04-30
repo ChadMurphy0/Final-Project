@@ -59,7 +59,7 @@ def time_created_simplex(dimensions_list):
 
     return simplex_times
 
-dimensions = [50, 100, 200, 400, 600, 800, 1000]
+dimensions = [50, 100, 200, 400, 600, 800, 1000, 2000]
 simplex_runtimes = time_created_simplex(dimensions) # These are the dimensions I will be testing in terms of runtime
 plt.plot(dimensions, simplex_runtimes)
 plt.xlabel("Number of dimensions (variables and constraints)")
